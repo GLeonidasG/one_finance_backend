@@ -1,0 +1,22 @@
+{
+  "name": "one_finance_backend",
+  "version": "1.0.0",
+  "description": "A finance application for me and you",
+  "main": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsx index.ts",
+    "test": "mocha --config ./.mocharc.json"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "prisma": "^4.6.1",
+    "ts-node": "^10.9.1",
+    "tsx": "^3.12.1",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.6.1",
+    "fastify": "^4.10.2"
+  }
+}
