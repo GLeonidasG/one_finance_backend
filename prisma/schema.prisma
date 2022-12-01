@@ -6,6 +6,31 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./db.sql"
+}
+
+model Record {
+  ID          String @id @default(cuid())
+  description String
+  type        String
+  value       Float
+  tags        RecordTag[]
+}
+
+model RecordTag {
+  recordID String
+  tagID    String
+
+  Record Record? @relation(fields: [recordID], references: [ID])
+  Tag Tag? @relation(fields: [tagID], references: [ID])
+  @@id([recordID, tagID])
+}
+
+model Tag {
+  ID          String  @id @default(cuid())
+  description String
+  color       String
+
+  records     RecordTag[]
 }
