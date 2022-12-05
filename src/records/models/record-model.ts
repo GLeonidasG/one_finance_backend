@@ -1,8 +1,8 @@
 import { TagModel } from "../../tag/model/tag-model.js"
 
 export enum RecordType {
-  INCOME,
-  OUTCOME
+  INCOME = "INCOME",
+  OUTCOME = "OUTCOME"
 }
 
 export class RecordModel {
