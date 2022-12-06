@@ -6,12 +6,6 @@ import cors from "cors";
 const route = Router()
 
 route.use("/RecordService", recordRouter);
-route.get("/greetings", (_, res) => {
-  return res.status(200).send({ message: "Hello there" });
-});
-route.post("/posthere", (req, res) => {
-  return res.status(200).send(req.body);
-});
 
 export class ServerConfig {
 
