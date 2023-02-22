@@ -7,7 +7,7 @@ generator client {
 
 generator nestjsDto {
   provider                        = "prisma-generator-nestjs-dto"
-  output                          = "../"
+  output                          = "../src"
   outputToNestJsResourceStructure = "true"
   exportRelationModifierClasses   = "true"
   reExport                        = "false"
@@ -20,6 +20,19 @@ generator nestjsDto {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
+}
+
+model User {
+    ID Int @id @default(autoincrement())
+    username String
+    email String @unique
+    password String
+    balance Float
+
+    /// @DtoReadOnly
+    createdAt DateTime @default(now())
+    /// @DtoReadOnly
+    updatedAt DateTime @default(now())
 }
