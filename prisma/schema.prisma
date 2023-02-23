@@ -25,14 +25,34 @@ datasource db {
 }
 
 model User {
-    ID Int @id @default(autoincrement())
-    username String
-    email String @unique
-    password String
-    balance Float
+  ID       Int    @id @default(autoincrement())
+  username String
+  email    String @unique
+  password String
+  balance  Float
 
-    /// @DtoReadOnly
-    createdAt DateTime @default(now())
-    /// @DtoReadOnly
-    updatedAt DateTime @default(now())
+  /// @DtoReadOnly
+  createdAt DateTime @default(now())
+  /// @DtoReadOnly
+  updatedAt DateTime @default(now())
+
+
+  /// @DtoCreateOptional
+  /// @DtoRelationCanCreateOnCreate
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanCreateOnUpdate
+  /// @DtoRelationCanConnectOnUpdate
+  cards     Card[]
+}
+
+model Card {
+  ID         Int      @id @default(autoincrement())
+  name       String
+  cardID     String   @unique
+  validFrom  DateTime
+  validThru DateTime
+
+  belongsToUserID Int
+  /// @DtoRelationRequired
+  belongsToUser   User? @relation(fields: [belongsToUserID], references: [ID])
 }

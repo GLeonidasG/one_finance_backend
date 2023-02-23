@@ -11,6 +11,7 @@ async function bootstrap() {
     .setDescription('One finance is a expense tracker to plan your finances and ')
     .setVersion('1.0')
     .addTag('user', 'Use this API to manage users')
+    .addTag('card', 'Use this API to manage cards for users')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
