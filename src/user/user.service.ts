@@ -8,7 +8,7 @@ export class UserService {
   constructor(private prismaService: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
-    return await this.prismaService.user.create({data: createUserDto});
+    return await this.prismaService.user.create({data: { ...createUserDto, cards: { } }});
   }
 
   async findAll() {

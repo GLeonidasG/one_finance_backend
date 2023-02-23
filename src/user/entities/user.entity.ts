@@ -1,5 +1,5 @@
 
-
+import {Card} from '../../card/entities/card.entity'
 
 
 export class User {
@@ -10,4 +10,5 @@ password: string ;
 balance: number ;
 createdAt: Date ;
 updatedAt: Date ;
+cards?: Card[] ;
 }
