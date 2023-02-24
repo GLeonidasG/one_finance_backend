@@ -36,23 +36,42 @@ model User {
   /// @DtoReadOnly
   updatedAt DateTime @default(now())
 
+  /// @DtoCreateOptional
+  /// @DtoRelationCanCreateOnCreate
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanCreateOnUpdate
+  /// @DtoRelationCanConnectOnUpdate
+  cards Card[]
+}
+
+model Card {
+  ID        Int      @id @default(autoincrement())
+  name      String
+  cardID    String   @unique
+  validFrom DateTime
+  validThru DateTime
 
   /// @DtoCreateOptional
   /// @DtoRelationCanCreateOnCreate
   /// @DtoRelationCanConnectOnCreate
   /// @DtoRelationCanCreateOnUpdate
   /// @DtoRelationCanConnectOnUpdate
-  cards     Card[]
-}
-
-model Card {
-  ID         Int      @id @default(autoincrement())
-  name       String
-  cardID     String   @unique
-  validFrom  DateTime
-  validThru DateTime
+  records Record[]
 
   belongsToUserID Int
   /// @DtoRelationRequired
   belongsToUser   User? @relation(fields: [belongsToUserID], references: [ID])
+}
+
+model Record {
+  ID          Int      @id @default(autoincrement())
+  title       String
+  description String
+  type        String
+  value       Float
+  entryDate   DateTime
+
+  recordsFromCardId Int
+  /// @DtoRelationRequired
+  recordsFromCard   Card? @relation(fields: [recordsFromCardId], references: [ID])
 }

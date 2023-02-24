@@ -12,6 +12,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('user', 'Use this API to manage users')
     .addTag('card', 'Use this API to manage cards for users')
+    .addTag('record', 'Use this API to manage record for cards')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
