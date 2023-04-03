@@ -5,20 +5,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator nestjsDto {
-  provider                        = "prisma-generator-nestjs-dto"
-  output                          = "../src"
-  outputToNestJsResourceStructure = "true"
-  exportRelationModifierClasses   = "true"
-  reExport                        = "false"
-  createDtoPrefix                 = "Create"
-  updateDtoPrefix                 = "Update"
-  dtoSuffix                       = "Dto"
-  entityPrefix                    = ""
-  entitySuffix                    = ""
-  fileNamingStyle                 = "camel"
-}
-
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
@@ -31,16 +17,9 @@ model User {
   password String
   balance  Float
 
-  /// @DtoReadOnly
   createdAt DateTime @default(now())
-  /// @DtoReadOnly
   updatedAt DateTime @default(now())
 
-  /// @DtoCreateOptional
-  /// @DtoRelationCanCreateOnCreate
-  /// @DtoRelationCanConnectOnCreate
-  /// @DtoRelationCanCreateOnUpdate
-  /// @DtoRelationCanConnectOnUpdate
   cards Card[]
 }
 
@@ -51,15 +30,9 @@ model Card {
   validFrom DateTime
   validThru DateTime
 
-  /// @DtoCreateOptional
-  /// @DtoRelationCanCreateOnCreate
-  /// @DtoRelationCanConnectOnCreate
-  /// @DtoRelationCanCreateOnUpdate
-  /// @DtoRelationCanConnectOnUpdate
   records Record[]
 
   belongsToUserID Int
-  /// @DtoRelationRequired
   belongsToUser   User? @relation(fields: [belongsToUserID], references: [ID])
 }
 
@@ -72,6 +45,5 @@ model Record {
   entryDate   DateTime
 
   recordsFromCardId Int
-  /// @DtoRelationRequired
   recordsFromCard   Card? @relation(fields: [recordsFromCardId], references: [ID])
 }
