@@ -18,6 +18,15 @@ export class CardService {
     return await this.prismaService.card.findFirst({ where: { ID: id } });
   }
 
+  async findFromUserId(id: number) {
+    return await this.prismaService.card.findMany({
+      include: { belongsToUser: true },
+      where: {
+        belongsToUserID: id
+      }
+    })
+  }
+
   async update(id: number, updateCardDto: UpdateCardDto) {
     return await this.prismaService.card.update({
       data: updateCardDto,

@@ -24,6 +24,11 @@ export class RecordController {
     return this.recordService.findOne(+id);
   }
 
+  @Get('fromCard/:id')
+  listRecordsFromCard(@Param('id') id: string) {
+    return this.recordService.findManyFromCardId(+id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRecordDto: UpdateRecordDto) {
     return this.recordService.update(+id, updateRecordDto);
