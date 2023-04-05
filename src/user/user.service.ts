@@ -20,7 +20,7 @@ export class UserService {
   }
 
   async findOneWithCards(id: number) {
-    return await this.prismaService.user.findFirst({
+    return await this.prismaService.user.findFirstOrThrow({
       select: { username: true, email: true, cards: true },
       where: { ID: id },
     });

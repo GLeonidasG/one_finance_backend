@@ -26,7 +26,12 @@ export class UserController {
 
   @Get('/:id/withCards')
   async findOneWithCards(@Param('id') id: string) {
+    try {
     return await this.userService.findOneWithCards(+id);
+    } catch (e) {
+      console.log(e, "USER NOT FOUND");
+      return {}
+    }
   }
 
   @Patch(':id')
